@@ -1,0 +1,15 @@
+
+@media print { 
+nav{display:none;}
+
+.header-fixtures{
+	display:none;
+}
+.sidebar{display:none;}
+.footer{display:none;}
+.comment-wrap{display:none;}
+.pre-footer{display:none;}
+.show-social-wrap , .show-text-size{display:none;}
+#scrollTop{display:none !important;}
+.content h3 span{font-size:16px;}
+}

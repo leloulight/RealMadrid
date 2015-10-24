@@ -1,0 +1,164 @@
+@media screen and (max-width: 479px) {
+
+  body{overflow-x:hidden;}
+
+  .header-fixtures{
+	margin:0 auto;
+	width:100%;
+	font-size:7px;
+	color:#fff;
+  }
+
+  .footer{
+  	position: relative;
+    bottom: 0;
+    width:100%;
+  }
+
+  .header-fixtures span{
+
+  }
+
+  .posts-list > li > .post > .small-post-photo{
+    height:170px;
+  }
+
+  .latest-fixture-date{
+    padding:4%;
+  }
+  .latest-fixture-league{
+    text-align:center;
+  }
+  .big-post .post{height:200px !important;}
+  .biggest-post-image{
+  width:100%;
+  height:200px;
+  background-position:center center;
+  background-size:cover;
+}
+
+  .small-post-image{
+  width:100%;
+  height: 200px;
+  background-position:center center;
+  background-size:cover;
+}
+.smallest-post-image{
+  background-size:cover;
+  width:100%;
+  background-position:center center;
+  height:200px;
+}
+.other-news-image{
+  width:100%;
+  height:70px;
+  background-size:cover;
+}
+
+#search-results{
+  position:absolute;
+  z-index:999;
+  background-color:$realWhite;
+  margin-top: -8px;
+  width:300px;
+  max-width: 100%;
+  margin-left: -20px;
+  max-height: 300px;
+  overflow: auto;
+  border-left: 1px solid $realGrey;
+  border-right: 1px solid $realGrey;
+  border-bottom: 1px solid $realGrey;
+}
+#search-results ul{
+  list-style:none;
+  padding:0 0%;
+}
+#search-results ul li{
+  word-break: break-word;
+  margin-bottom:1%;
+  padding:2% 0%;
+  border-bottom:1px solid rgba(95,98,97,0.5);
+} 
+#search-results ul li:nth-child(2n+1){
+  background-color:#eee;
+}  
+#search-results ul li:hover{
+  cursor:pointer;
+  background-color:#CECECE;
+}
+#search-results ul li a img{
+  width:65px;
+} 
+#search-results ul li a{
+  margin:0 1%;
+  color:$realGreyDarker;
+}
+#search-results ul li a:hover{
+  text-decoration:underline;
+}
+
+}
+
+/************************************/
+@media screen and (max-width: 729px) {
+
+  .header-fixtures{
+  margin:0 auto;
+  width:100%;
+  font-size:7px;
+  color:#fff;
+  }
+
+  .footer{
+    position: relative;
+    bottom: 0;
+    background-color: red;
+    width:100%;
+  }
+
+  .header-fixtures span{
+
+  }
+
+  .posts-list > li > .post > .small-post-photo{
+    height:170px;
+  }
+
+  .latest-fixture-date{
+    padding:4%;
+  }
+  .latest-fixture-league{
+    text-align:center;
+  }
+  .big-post .post .post-photo{
+  height:200px !important;
+  width:100%;
+  background-position:center center;
+  background-size:cover;
+  }
+  .biggest-post-image{
+  width:100%;
+  height:200px;
+  background-position:center center;
+  background-size:cover;
+}
+  .small-post-image{
+  width:100%;
+  height: 200px;
+  background-position:center center;
+  background-size:cover;
+}
+.smallest-post-image{
+  background-size:cover;
+  width:100%;
+  background-position:center center;
+  height:200px;
+}
+.other-news-image{
+  width:100%;
+  height:70px;
+  background-size:cover;
+}
+
+}
+/**************************************/

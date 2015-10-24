@@ -1,0 +1,117 @@
+a:link {color: #84c4e2;}
+a:visited {color:#84c4e2;}
+a:hover {color: #cd82ad;}
+a:active {color: #84c4e2;}
+
+$realGrey : #686868;
+$realGreyDarker : #5F6261;
+$realGreyGreen : #d9fa61;
+$realBlue : #062244;
+$realBlueLighter : #0990BD;
+$realWhite : #ffffff;
+
+/* make sidebar nav vertical */ 
+@media (min-width: 768px) {
+  .sidebar-nav{
+	//background-color:$realBlue !important;
+  }
+
+  .sidebar-nav .navbar .navbar-collapse {
+    padding: 0;
+    max-height: none;
+  }
+  .sidebar-nav .navbar ul {
+    float: none;
+  }
+  .sidebar-nav .navbar ul:not {
+    display: block;
+  }
+  .sidebar-nav .navbar li {
+    float: none;
+    display: block;
+  }
+  .sidebar-nav .navbar li a {
+    padding:2% 1%;
+    color:$realGreyDarker !important;
+  }
+
+   .sidebar-nav .navbar li a:hover{
+   	color:$realBlue !important;
+   }
+}
+
+.admin-dropdown{
+	//background:none !important;
+	//background-color:#fffccc !important;
+	min-width:325px !important;
+} 
+
+.admin-sidebar{
+	//background-color:#000;
+	//height:600px;
+}
+
+.admin-content{
+	height:600px;
+}
+
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu>.dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -6px;
+    margin-left: -1px;
+    -webkit-border-radius: 0 6px 6px 6px;
+    -moz-border-radius: 0 6px 6px;
+    border-radius: 0 6px 6px 6px;
+}
+
+.dropdown-submenu:hover>.dropdown-menu {
+    display: block;
+}
+
+.dropdown-submenu>a:after {
+    display: block;
+    content: " ";
+    float: right;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 5px 0 5px 5px;
+    border-left-color: #ccc;
+    margin-top: 5px;
+    margin-right: -10px;
+}
+
+.dropdown-submenu:hover>a:after {
+    border-left-color: #fff;
+}
+
+.dropdown-submenu.pull-left {
+    float: none;
+}
+
+.dropdown-submenu.pull-left>.dropdown-menu {
+    left: -100%;
+    margin-left: 10px;
+    -webkit-border-radius: 6px 0 6px 6px;
+    -moz-border-radius: 6px 0 6px 6px;
+    border-radius: 6px 0 6px 6px;
+}
+.admin-nav{
+	text-align:left;
+}
+.datetimepicker{
+	top:125% !important;
+}
+
+.admin-nav > li > a, .admin-nav > li > a:visited, .admin-nav > li > a:focus{
+  color:#333 !important;
+}
+.create-modal:hover{
+  cursor:pointer;
+}
