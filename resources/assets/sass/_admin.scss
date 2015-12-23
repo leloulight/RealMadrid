@@ -104,9 +104,10 @@ $realWhite : #ffffff;
 }
 .admin-nav{
 	text-align:left;
+  margin:2% 6%;
 }
 .datetimepicker{
-	top:125% !important;
+	top:100% !important;
 }
 
 .admin-nav > li > a, .admin-nav > li > a:visited, .admin-nav > li > a:focus{
@@ -114,4 +115,12 @@ $realWhite : #ffffff;
 }
 .create-modal:hover{
   cursor:pointer;
+}
+
+.modal-body{
+  padding:0 !important;
+}
+
+.modal-header{
+  border:none !important;
 }

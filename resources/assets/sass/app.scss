@@ -4,9 +4,11 @@
 @import "responsive";
 @import "print";
 
-$realGrey : #686868;
+//$realGrey : #686868;
+$realGrey : #062244;
 $realGreyDarker : #5F6261;
-$realGreyGreen : #d9fa61;
+//$realGreyGreen : #d9fa61;
+$realGreyGreen : #fff;
 $realBlue : #062244;
 $realBlueLighter : #0990BD;
 $realWhite : #ffffff;
@@ -222,6 +224,7 @@ table{
 	overflow: hidden;
 	//height:300px;
 }
+
 .posts-list > li > .post > .small-post-photo > .post-text{
 	position: absolute;
     left: 0;
@@ -237,6 +240,7 @@ table{
     height:50%;
     padding-top: 0;
 }
+
 /*--------------------------------*/
 .posts-list > .smallest-post >.post > .smallest-post-photo > .post-text{
     //background-color: rgba(0, 0, 0, 0.35);
@@ -345,6 +349,15 @@ table{
 	background-position:center center;
 	background-size:cover;
 }
+
+.small-post-background{
+    width:100%;
+	height:250px;
+	transition: all .5s ease-in-out;
+}
+.small-post-background:hover{
+	transform: scale(1.1);
+}
 .small-post-image{
 	width:100%;
 	height: 250px;
@@ -355,6 +368,10 @@ table{
 	background-size:cover;
 	width:100%;
 	height:170px;
+	transition: all .5s ease-in-out;
+}
+.smallest-post-image:hover{
+	transform: scale(1.1);
 }
 .other-news-image{
 	width:100%;
@@ -405,6 +422,12 @@ table{
 	bottom:2%;
 	position:absolute;
 	right:2%;
+}
+.show-social-wrap .fa-print{
+	color:$realGrey !important;
+}
+.show-social-wrap .fa-print:hover{
+	color:$realBlue !important;
 }
 .big-post-bottom{
 	
@@ -831,6 +854,7 @@ hr{
 	background-color:#fff;
 	border-bottom:3px solid #ddd;
 	padding:1%;
+	min-height: 30px !important;
 }
 .latest-fixture-date>.pull-right{
 	text-align:right;
@@ -990,6 +1014,9 @@ hr{
 	text-decoration:underline;
 }
 .page-header-title{
+	
+	margin-top:0 !important;
+
 	 &:after {
     content: '';
     display: block;
@@ -1008,4 +1035,11 @@ hr{
 }
 .user-edit-image img{
 	width:70px;
+}
+.stadium-info{
+	background-color:#eee;
+	border-bottom:3px solid #ddd;
+}
+.stadium-info h5, .stadium-info p{
+	padding:1%;
 }

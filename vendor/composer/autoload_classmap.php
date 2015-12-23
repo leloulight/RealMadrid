@@ -7,10 +7,15 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'AddDefaultRoleValueToUsers' => $baseDir . '/database/migrations/2015_10_13_190423_addDefaultRoleValueToUsers.php',
+    'AddNumbertoPlayer' => $baseDir . '/database/migrations/2015_12_22_220538_addNumbertoPlayer.php',
     'AddPhotoDescriptionToPostsTable' => $baseDir . '/database/migrations/2015_10_12_191140_add_photo_description_to_posts_table.php',
+    'AddPositiontoPositions' => $baseDir . '/database/migrations/2015_12_22_223124_addPositiontoPositions.php',
+    'AddSlugToSeasonsTable' => $baseDir . '/database/migrations/2015_10_29_191637_addSlugToSeasonsTable.php',
+    'CreateAboutsTable' => $baseDir . '/database/migrations/2015_11_20_195211_create_abouts_table.php',
     'CreateCategoriesTable' => $baseDir . '/database/migrations/2015_09_20_180349_create_categories_table.php',
     'CreateCommentsTable' => $baseDir . '/database/migrations/2015_09_27_165959_create_comments_table.php',
     'CreateCountriesTable' => $baseDir . '/database/migrations/2015_10_06_235623_create_countries_table.php',
+    'CreateDonatesTable' => $baseDir . '/database/migrations/2015_11_20_213316_create_donates_table.php',
     'CreateFixturesTable' => $baseDir . '/database/migrations/2015_10_07_174637_create_fixtures_table.php',
     'CreateLeaguesTable' => $baseDir . '/database/migrations/2015_10_03_151124_create_leagues_table.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
@@ -24,6 +29,7 @@ return array(
     'CreatePostTagsTable' => $baseDir . '/database/migrations/2015_09_24_161402_create_post_tags_table.php',
     'CreatePostsTable' => $baseDir . '/database/migrations/2015_09_20_180358_create_posts_table.php',
     'CreateRolesTable' => $baseDir . '/database/migrations/2015_09_18_155857_create_roles_table.php',
+    'CreateSantiagoTable' => $baseDir . '/database/migrations/2015_11_20_142704_create_santiago_table.php',
     'CreateSeasonsTable' => $baseDir . '/database/migrations/2015_10_06_235510_create_seasons_table.php',
     'CreateStadiumsTable' => $baseDir . '/database/migrations/2015_10_03_151149_create_stadiums_table.php',
     'CreateStatesTable' => $baseDir . '/database/migrations/2015_09_18_150720_create_states_table.php',

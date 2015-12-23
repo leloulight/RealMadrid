@@ -11,6 +11,7 @@
 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="/css/styles.css"> 
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.0/sweetalert.css">
+	<link rel="stylesheet" type="text/css" href="/swipebox/css/swipebox.css">
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 
 	<style type="text/css">
@@ -67,7 +68,6 @@
 
 </head>
 <body>
-{!! \Carbon\Carbon::setLocale('lt'); !!}
 <div class="loading-gif"></div>
 
 	<div id="fb-root"></div>
@@ -87,13 +87,21 @@
 			<span>{!! $fixtures->league_title !!} |</span>
 			<span>{!! \Carbon\Carbon::parse($fixtures->fixture_date)->format('Y-m-d H:i')  !!} |</span>
 			<span>
-				<img src="{!! $fixtures->team1_logo_path.$fixtures->team1_logo_name !!}">
+				<img src="/{!! $fixtures->team1_logo_path.$fixtures->team1_logo_name !!}">
 				:
-				<img src="{!! $fixtures->team2_logo_path.$fixtures->team2_logo_name !!}"></span>
+				<img src="/{!! $fixtures->team2_logo_path.$fixtures->team2_logo_name !!}"></span>
 			<span>Liko : <span id="countdown"></span></span>
 			<span id="fixtureOn">Vyksta rungtynės!</span>
 			@else
-			<span>Rungtynių nėra</span>
+			<span>Artimiausios varžybos :</span>
+			<span>{!! $fixture->league_title !!} |</span>
+			<span>{!! \Carbon\Carbon::parse($fixture->fixture_date)->format('Y-m-d H:i')  !!} |</span>
+			<span>
+				<img src="/{!! $fixture->team1_logo_path.$fixture->team1_logo_name !!}">
+				:
+				<img src="/{!! $fixture->team2_logo_path.$fixture->team2_logo_name !!}"></span>
+			<span>Liko : <span id="countdown"></span></span>
+			<span id="fixtureOn">Vyksta rungtynės!</span>
 			@endif
 		</div>
 
@@ -114,7 +122,7 @@
 
 		<div class="col-md-3 sidebar">
 
-			<div class="panel panel-default">
+			<!--<div class="panel panel-default">
 				<div class="panel-heading">
 					<h3 class="panel-title"> <i class="fa fa-bar-chart"></i>
 						Statistika
@@ -143,7 +151,7 @@
       </table>
 					</div>
 				</div>
-			</div>
+			</div>-->
 
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -155,20 +163,23 @@
 				<div class="panel-body last-games">
 					
 					<div class="col-md-12 no-padding-right no-padding-left latest-fixture-date">
-					<span class="pull-left col-md-6 no-padding-right">{!! $latestFixtures->stadium_title !!}</span>
-					<span class="pull-right col-md-6 no-padding-left">{!! \Carbon\Carbon::parse($latestFixtures->fixture_date)->format('Y-m-d H:i')  !!}</span>
+						<span class="pull-left col-md-6 no-padding-right">{!! $latestFixtures->stadium_title !!}</span>
+						<span class="pull-right col-md-6 no-padding-left">{!! \Carbon\Carbon::parse($latestFixtures->fixture_date)->format('Y-m-d H:i')  !!}</span>
 					</div>
 					<div class="col-md-12 no-padding-right no-padding-left latest-fixture-league">
 					<span class="text-center col-md-12 no-padding-right no-padding-left">{!! $latestFixtures->league_title !!}
-					<img src="{!! $latestFixtures->league_logo_path.$latestFixtures->league_logo_name !!}" title="{!! $latestFixtures->league_title !!}" width="" height="20">
+					<img src="/{!! $latestFixtures->league_logo_path.$latestFixtures->league_logo_name !!}" title="{!! $latestFixtures->league_title !!}" width="" height="20">
 					</span>
 					</div>
 					<div class="col-md-12 latest-fixture-score">
-						<span class="col-md-10 pull-left no-padding-right no-padding-left">{!! $latestFixtures->team1_title !!} <img src="{!! $latestFixtures->team1_logo_path.$latestFixtures->team1_logo_name !!}" width="20" height="20" title="{!! $latestFixtures->team1_title !!}"></span>
-						<span class="col-md-2"><h4 style="margin-top:0 !important;">{!! $latestFixtures->team1_score !!}</h4></span>
-
-						<span class="col-md-10 pull-left no-padding-right no-padding-left">{!! $latestFixtures->team2_title !!} <img src="{!! $latestFixtures->team2_logo_path.$latestFixtures->team2_logo_name !!}" width="20" height="20" title="{!! $latestFixtures->team2_title !!}"></span>
-						<span class="col-md-2"><h4 style="margin-top:0 !important;">{!! $latestFixtures->team2_score !!}</h4></span>	
+						<div style="min-height: 30px;">
+							<span class="col-md-10 pull-left no-padding-right no-padding-left">{!! $latestFixtures->team1_title !!} <img src="/{!! $latestFixtures->team1_logo_path.$latestFixtures->team1_logo_name !!}" width="20" height="20" title="{!! $latestFixtures->team1_title !!}"></span>
+							<span class="col-md-2"><span style="margin-top:0 !important;font-size:18px;float:right;padding-right:10px;">{!! $latestFixtures->team1_score !!}</span></span>
+						</div>
+						<div style="min-height: 30px;">
+							<span class="col-md-10 pull-left no-padding-right no-padding-left">{!! $latestFixtures->team2_title !!} <img src="/{!! $latestFixtures->team2_logo_path.$latestFixtures->team2_logo_name !!}" width="20" height="20" title="{!! $latestFixtures->team2_title !!}"></span>
+							<span class="col-md-2"><span style="margin-top:0 !important;font-size:18px;float:right;padding-right:10px;">{!! $latestFixtures->team2_score !!}</span></span>	
+						</div>
 					</div>
 				</div>
 			</div>
@@ -190,16 +201,16 @@
 							</div>
 							<div class="col-md-12 no-padding-right no-padding-left calendar-league">
 							<span class="text-center col-md-12 no-padding-right no-padding-left">{!! $calendar->league_title !!}
-							<img src="{!! $calendar->league_logo_path.$calendar->league_logo_name !!}" title="{!! $calendar->league_title !!}" width="20">
+							<img src="/{!! $calendar->league_logo_path.$calendar->league_logo_name !!}" title="{!! $calendar->league_title !!}" width="20">
 							</span>
 							</div>
 							<div class="col-md-12 no-padding-right no-padding-left calendar-teams">
 								<span class="pull-left col-md-5 no-padding-right no-padding-left text-right">
 									{!! $calendar->team1_title !!}
-									<img src="{!! $calendar->team1_logo_path.$calendar->team1_logo_name !!}" title="{!! $calendar->team1_title !!}" width="20" height="20"></span>
+									<img src="/{!! $calendar->team1_logo_path.$calendar->team1_logo_name !!}" title="{!! $calendar->team1_title !!}" width="20" height="20"></span>
 									<span class="col-md-2 pull-left text-center"> : </span>
 								<span class="pull-left col-md-5 no-padding-right no-padding-left text-left" >
-								<img src="{!! $calendar->team2_logo_path.$calendar->team2_logo_name !!}" title="{!! $calendar->team2_title !!}" width="20" height="20">
+								<img src="/{!! $calendar->team2_logo_path.$calendar->team2_logo_name !!}" title="{!! $calendar->team2_title !!}" width="20" height="20">
 									{!! $calendar->team2_title !!}
 									</span>
 							</div>
@@ -359,7 +370,7 @@
 			        <h4 class="modal-title">Paremkite mus!</h4>
 			      </div>
 			      <div class="modal-body">
-			        <p>Parama mūsų tinklapiui</p>
+			        {!! $donation->donate !!}
 			      </div>
 			      <div class="modal-footer">
 			        <button type="button" class="btn btn-default" data-dismiss="modal">Uždaryti</button>
@@ -401,6 +412,15 @@
 <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
 <script type="text/javascript" src="/js/scripts.js"></script>
 
+<script type="text/javascript" src="/swipebox/js/jquery.swipebox.min.js"></script>
+<script type="text/javascript">
+  $( document ).ready(function() {
+
+      /* Basic Gallery */
+      $( '.swipebox' ).swipebox();
+
+      });
+</script>
 <script type="text/javascript">
 
 	$(document).on("click", "#pollForm input[type=radio]", function(e){ 
@@ -461,10 +481,12 @@
   	};
   //	if(timestamp >= now){
     if (count.time <= 0) {
+    	now.setHours(now.getHours() - 2);
+    	if( timestamp >= now){
     	$("#fixtureOn").show(500);
-    	clearInterval(timer); 
+    	clearInterval(timer);
  		}
- 	//}
+ 	}
 
  	var c = true;
 		setInterval(function (){
@@ -505,15 +527,6 @@
 		$(".loading-gif").fadeOut("slow");
 	});
 </script>
-
-<!-- Begin Cookie Consent plugin by Silktide - http://silktide.com/cookieconsent -->
-<script type="text/javascript">
-    window.cookieconsent_options = {"message":"This website uses cookies to ensure you get the best experience on our website","dismiss":"Got it!","learnMore":"More info","link":"/cookie-policy","theme":"light-bottom"};
-</script>
-
-<script type="text/javascript" src="//s3.amazonaws.com/cc.silktide.com/cookieconsent.latest.min.js"></script>
-<!-- End Cookie Consent plugin -->
-
 
 
 @include ('flash')

@@ -22,10 +22,11 @@ elixir(function(mix) {
             'admin/admin_adding_items_script.js',
             'DateTimePicker/bootstrap-datetimepicker.js',
             'Dropzone/dropzone.js',
-            'Swipebox/jquery.swipebox.js',
+            //'Swipebox/jquery.swipebox.js',
             'SweetAlert/sweetalert-dev.js',
             'SweetAlert/sweetalert.min.js',
             'jScroll/jScroll.min.js',
+            //'ckeditor/ckeditor.js',
            // 'SiteScripts/comments.js'
             //'DateTimePicker/bootstrap-datetimepicker.fr.js',
             //'amcharts/amcharts.js',
@@ -39,7 +40,7 @@ elixir(function(mix) {
     	], './public/js/scripts.js')
     	.styles([
             'DateTimePicker/bootstrap-datetimepicker.min.css',
-            'Swipebox/swipebox.css',
+            //'Swipebox/swipebox.css',
             //'bootstrap/css/bootstrap.css',
             //'bootstrap/css/bootstrap-theme.css'
             //'SweetAlert/sweetalert.css',

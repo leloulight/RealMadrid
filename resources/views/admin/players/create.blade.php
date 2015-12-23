@@ -1,6 +1,7 @@
 @extends('admin')
 
 @section('admin_content')
+@include('admin.players.modals')
 
 <div class="container col-md-8 col-md-offset-2">@include('errors.list')</div>
 
@@ -8,7 +9,7 @@
 
 <h3 class="text-center">Sukurti naują žaidėją : </h3>
 
-  <form method="POST" action="/dashboard/players" id="leagueFormUpload" enctype="multipart/form-data">
+  <form method="POST" action="/dashboard/players" id="addPlayerFormUpload" enctype="multipart/form-data">
 
 	{!! csrf_field() !!}
 
@@ -41,6 +42,10 @@
     {!! Form::label('player_height','Ūgis : ') !!}
     {!! Form::number('player_height',null,['class'=>'form-control']) !!}
     </div>
+    <div class="form-group">
+      <label for="player_number">Numeris :</label>
+      <input type="number" name="player_number" id="player_number" class="form-control">
+    </div>
 
     <div class="form-group">
     <label for="season_id">Sezonas : </label>
@@ -62,7 +67,8 @@
 
     <div class="form-group">
     <label for="country_id">Šalis : </label>
-      <select name="country_id" class="form-control">
+<!--     <em><a  class="create-modal" data-toggle="modal" data-target="#myplayerCountryModal">(Sukurti naują šalį)</a></em>
+ -->      <select name="country_id" class="form-control" id="playerCountry">
         @foreach($countries as $country)
           <option value="{!! $country->id !!}">{!! $country->title !!}</option>
         @endforeach
@@ -71,12 +77,12 @@
 
 
     <div class="form-group">
-      <label>Lygos logo:</label><br/>
+      <label>Žaidėjo nuotrauka:</label><br/>
       <input type="file" name="file" id="file" class="inputfile" accept="image/*" />
       <label for="file">
       <i class="fa fa-cloud-upload"></i>
       Įkelti žaidėjo nuotrauką</label>
-      <span id="file_upload"></span>
+      <span id="player_photo"></span>
     </div>
  
     <div class="form-group">
@@ -89,9 +95,10 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script type="text/javascript">
   $(document).ready(function(){
-  $("#leagueFormUpload #file").change(function() {
+  $("#addPlayerFormUpload #file").change(function() {
     var fileName = $(this).val().replace(/C:\\fakepath\\/i, '');
-    $("#file_upload").text(fileName);
+    console.log(fileName);
+    $("#player_photo").text(fileName);
   });
   });
 </script>

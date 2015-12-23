@@ -8,6 +8,8 @@ use App\League;
 use App\Stadium;
 use App\Fixture;
 use App\Team;
+use DB;
+use Carbon\Carbon;
 use App\Http\Requests\createHeaderFixtureRequest;
 use App\Http\Controllers\Controller;
 
@@ -20,7 +22,53 @@ class FixturesController extends Controller
      */
     public function index()
     {
-        //
+         $comingFixtures = DB::table('fixtures')
+            ->leftJoin('stadiums', 'stadiums.id', '=', 'fixtures.stadium_id')
+            ->leftJoin('leagues', 'leagues.id', '=', 'fixtures.league_id')
+            ->leftJoin('teams AS team1', 'team1.id', '=', 'fixtures.team_1_id')
+            ->leftJoin('teams AS team2', 'team2.id', '=', 'fixtures.team_2_id')
+            ->select(
+                'fixtures.id AS fixture_id',
+                'stadiums.title AS stadium_title', 
+                'leagues.title AS league_title',  
+                'fixtures.fixture_date AS fixture_date', 
+                'team1.title AS team1_title',
+                'team2.title AS team2_title',
+                'team1.logo_path AS team1_logo_path',
+                'team1.logo_name AS team1_logo_name',
+                'team2.logo_path AS team2_logo_path',
+                'team2.logo_name AS team2_logo_name',
+                'fixtures.team_1_score AS team_1_score', 
+                'fixtures.team_2_score AS team_2_score'
+            )
+            ->where('fixtures.fixture_date', '>=', Carbon::now())
+            ->orderBy('fixtures.fixture_date', 'DESC')
+            ->paginate(15);
+
+            $latestFixtures = DB::table('fixtures')
+            ->leftJoin('stadiums', 'stadiums.id', '=', 'fixtures.stadium_id')
+            ->leftJoin('leagues', 'leagues.id', '=', 'fixtures.league_id')
+            ->leftJoin('teams AS team1', 'team1.id', '=', 'fixtures.team_1_id')
+            ->leftJoin('teams AS team2', 'team2.id', '=', 'fixtures.team_2_id')
+            ->select(
+                'fixtures.id AS fixture_id',
+                'stadiums.title AS stadium_title', 
+                'leagues.title AS league_title',  
+                'fixtures.fixture_date AS fixture_date', 
+                'team1.title AS team1_title',
+                'team2.title AS team2_title',
+                'team1.logo_path AS team1_logo_path',
+                'team1.logo_name AS team1_logo_name',
+                'team2.logo_path AS team2_logo_path',
+                'team2.logo_name AS team2_logo_name',
+                'fixtures.team_1_score AS team_1_score', 
+                'fixtures.team_2_score AS team_2_score'
+            )
+            ->where('fixtures.fixture_date', '<', Carbon::now())
+            ->orderBy('fixtures.fixture_date', 'DESC')
+            ->paginate(15);
+
+        return view('admin.fixtures.index', compact('comingFixtures', $comingFixtures, 'latestFixtures', $latestFixtures));
     }
 
     /**
@@ -87,7 +135,32 @@ class FixturesController extends Controller
      */
     public function edit($id)
     {
-        //
+
+        $fixture = DB::table('fixtures')
+            ->leftJoin('stadiums', 'stadiums.id', '=', 'fixtures.stadium_id')
+            ->leftJoin('leagues', 'leagues.id', '=', 'fixtures.league_id')
+            ->leftJoin('teams AS team1', 'team1.id', '=', 'fixtures.team_1_id')
+            ->leftJoin('teams AS team2', 'team2.id', '=', 'fixtures.team_2_id')
+            ->select(
+                'fixtures.id AS fixture_id',
+                'stadiums.title AS stadium_title', 
+                'leagues.title AS league_title',  
+                'fixtures.fixture_date AS fixture_date', 
+                'team1.title AS team1_title',
+                'team2.title AS team2_title',
+                'team1.logo_path AS team1_logo_path',
+                'team1.logo_name AS team1_logo_name',
+                'team2.logo_path AS team2_logo_path',
+                'team2.logo_name AS team2_logo_name',
+                'fixtures.team_1_score AS team_1_score', 
+                'fixtures.team_2_score AS team_2_score'
+            )
+            //->where('fixtures.fixture_date', '<', Carbon::now())
+            ->where('fixtures.id', '=', $id)
+            ->orderBy('fixtures.fixture_date', 'DESC')
+            ->get();
+
+            return view('admin.fixtures.edit', compact('fixture', $fixture));
     }
 
     /**
@@ -99,7 +172,18 @@ class FixturesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+       $this->validate($request,['team_1_score'=>'required', 'team_2_score'=>'required']);
+    
+         $fixture = Fixture::find($id);
+
+        $fixture->team_1_score = $request->get('team_1_score');
+        $fixture->team_2_score = $request->get('team_2_score');
+      
+        $fixture->save();
+     
+        flash()->success('','Rezultatas redaguotas!');
+
+        return redirect()->back();
     }
 
     /**
@@ -111,5 +195,33 @@ class FixturesController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function latest()
+    {
+        $fixtures = DB::table('fixtures')
+            ->leftJoin('stadiums', 'stadiums.id', '=', 'fixtures.stadium_id')
+            ->leftJoin('leagues', 'leagues.id', '=', 'fixtures.league_id')
+            ->leftJoin('teams AS team1', 'team1.id', '=', 'fixtures.team_1_id')
+            ->leftJoin('teams AS team2', 'team2.id', '=', 'fixtures.team_2_id')
+            ->select(
+                'fixtures.id AS fixture_id',
+                'stadiums.title AS stadium_title', 
+                'leagues.title AS league_title',  
+                'fixtures.fixture_date AS fixture_date', 
+                'team1.title AS team1_title',
+                'team2.title AS team2_title',
+                'team1.logo_path AS team1_logo_path',
+                'team1.logo_name AS team1_logo_name',
+                'team2.logo_path AS team2_logo_path',
+                'team2.logo_name AS team2_logo_name',
+                'fixtures.team_1_score AS team_1_score', 
+                'fixtures.team_2_score AS team_2_score'
+            )
+            ->where('fixtures.fixture_date', '<', Carbon::now())
+            ->orderBy('fixtures.fixture_date', 'DESC')
+            ->get();
+
+        return view('admin.fixtures.latest', compact('fixtures', $fixtures));
     }
 }

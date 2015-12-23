@@ -12,6 +12,7 @@
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css">
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.0/sweetalert.css">
 </head>
+
 <body>
 <div class="loading-gif"></div>
 
@@ -67,7 +68,7 @@
             </a>
     		<ul class="dropdown-menu admin-dropdown multi-level" role="menu" aria-labelledby="dropdownMenu">
 
-    		 <li class="dropdown-submenu">
+    		  <li class="dropdown-submenu">
                 <a tabindex="-1" href="#"><i class="fa fa-star"></i> Sudėtis</a>
                 <ul class="dropdown-menu">
                   <li><a href="#"><i class="fa fa-plus-circle"></i> Naujas sezonas</a></li>
@@ -139,7 +140,7 @@
                 <li><a href="/dashboard/players"><i class="fa fa-table"></i> Visi žaidėjai</a></li> 
                 <li class="divider"></li>
                 <li><a href="/dashboard/players/statistics/create"><i class="fa fa-plus-circle"></i> Pridėti žaidėjo statistiką</a></li>
-                <li><a href="/dashboard/players/statistics"><i class="fa fa-chart"></i> Žaidėjų statistika</a></li>                       
+                <li><a href="/dashboard/players/statistics"><i class="fa fa-bar-chart"></i> Žaidėjų statistika</a></li>                       
               </ul>
             </li>
 
@@ -147,9 +148,9 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-university"></i> Stadionai <b class="caret"></b></a>
               <ul class="dropdown-menu admin-dropdown">
                 <li><a href="/dashboard/stadiums/create"><i class="fa fa-plus-circle"></i> Naujas stadionas</a></li>
-                <li><a href="/dashboard/stadiums"><i class="fa fa-table"></i> Visi stadionas</a></li>
+                <li><a href="/dashboard/stadiums"><i class="fa fa-table"></i> Visi stadionai</a></li>
                 <li class="divider"></li>
-                <li><a href="#"><i class="fa fa-diamond"></i>Santiago Bernabeu</a></li>   
+                <li><a href="/dashboard/santiago"><i class="fa fa-diamond"></i>Santiago Bernabeu</a></li>   
               </ul>
             </li>
 
@@ -157,15 +158,16 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-television"></i> Rungtynės <b class="caret"></b></a>
               <ul class="dropdown-menu admin-dropdown">
                 <li><a href="/dashboard/fixtures/create"><i class="fa fa-plus-circle"></i> Artimiausios rungtynės</a></li>
-                <li><a href="#"><i class="fa fa-table"></i> Paskutinės rungtynės</a></li>     
+                <li><a href="/dashboard/latestFixtures"><i class="fa fa-table"></i> Paskutinės rungtynės</a></li>
+                <li><a href="/dashboard/fixtures"><i class="fa fa-calendar-check-o"></i> Visos rungtynės</a></li>     
               </ul>
             </li>
 
             
-            <li><a href="#"><i class="fa fa-users"></i> Apie mus</a></li>
-            <li><a href="#"><i class="fa fa-folder"></i> Kategorijos</a></li>
+            <li><a href="/dashboard/about"><i class="fa fa-users"></i> Apie mus</a></li>
+            <li><a href="/dashboard/category"><i class="fa fa-folder"></i> Kategorijos</a></li>
             <li><a href="#"><i class="fa fa-tags"></i> Žymės</a></li>
-             
+            <li><a href="/dashboard/donate/editDonateText"><i class="fa fa-money"></i> Parama</a></li> 
              <li>
               <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-users"></i> Vartotojai</a>
             </li>
@@ -205,8 +207,6 @@
 <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
 <script type="text/javascript" src="/ckeditor/ckeditor.js"></script>
 <script type="text/javascript" src="/js/scripts.js"></script>
-
-
 
 <script type="text/javascript">
     $('.form_datetime').datetimepicker({
@@ -296,7 +296,7 @@ tinymce.init({
     // You might want to show the submit button only when 
     // files are dropped here:
     this.on("successmultiple", function() {
-    	showMessage("Puiku!", "Naujiena išsaugota!", "success");
+    	showMessage("", "Naujiena išsaugota!", "success");
     	setTimeout(function(){location.href = "/dashboard/posts"}, 1500);
     });
 
@@ -397,6 +397,37 @@ tinymce.init({
     var input = $(this).find("#modal-team-delete-form").attr("action", "/dashboard/teams/"+team_id);
   });
 </script>
+
+<script type="text/javascript">
+  $('#myStadiumDeleteModal').on('show.bs.modal', function (event) {
+    var stadium_id = $(event.relatedTarget).attr("stadium-id");
+    var input = $(this).find("#modal-stadium-delete-form").attr("action", "/dashboard/stadiums/"+stadium_id);
+  });
+</script>
+
+<script type="text/javascript">
+  $('#mySeasonDeleteModal').on('show.bs.modal', function (event) {
+    var season_id = $(event.relatedTarget).attr("season-id");
+    var input = $(this).find("#modal-season-delete-form").attr("action", "/dashboard/seasons/"+season_id);
+  });
+</script>
+
+<script type="text/javascript">
+  $('#myCategoryDeleteModal').on('show.bs.modal', function (event) {
+    var category_id = $(event.relatedTarget).attr("category-id");
+    var input = $(this).find("#modal-category-delete-form").attr("action", "/dashboard/category/"+category_id);
+  });
+</script>
+
+<script type="text/javascript">
+  $('#myPlayersDeleteModal').on('show.bs.modal', function (event) {
+    var player_id = $(event.relatedTarget).attr("player-id");
+    var input = $(this).find("#modal-player-delete-form").attr("action", "/dashboard/players/"+player_id);
+  });
+</script>
+
+
+
 
 @include ('flash')
 	

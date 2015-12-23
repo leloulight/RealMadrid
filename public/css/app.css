@@ -72,16 +72,23 @@ a:active {
   border-radius: 6px 0 6px 6px; }
 
 .admin-nav {
-  text-align: left; }
+  text-align: left;
+  margin: 2% 6%; }
 
 .datetimepicker {
-  top: 125% !important; }
+  top: 100% !important; }
 
 .admin-nav > li > a, .admin-nav > li > a:visited, .admin-nav > li > a:focus {
   color: #333 !important; }
 
 .create-modal:hover {
   cursor: pointer; }
+
+.modal-body {
+  padding: 0 !important; }
+
+.modal-header {
+  border: none !important; }
 
 @media screen and (max-width: 479px) {
   body {
@@ -218,7 +225,9 @@ a:active {
   #scrollTop {
     display: none !important; }
   .content h3 span {
-    font-size: 16px; } }
+    font-size: 16px; }
+  #disqus_thread {
+    display: none !important; } }
 
 body {
   overflow-x: hidden; }
@@ -267,17 +276,17 @@ table {
 
 .navigacija {
   background: none;
-  background-color: #686868 !important; }
+  background-color: #062244 !important; }
 
 /*.login-form a, .login-form a:focus, .login-form a:visited{
 	vertical-align:middle;
 	color:$realGreyGreen;
 }*/
 .user-menu a {
-  color: #d9fa61 !important; }
+  color: #fff !important; }
 
 .user-menu ul li a {
-  color: #d9fa61 !important; }
+  color: #fff !important; }
 
 .user-menu .dropdown-menu > li > a:focus, .user-menu .dropdown-menu > li > a:hover {
   background-color: #5F6261 !important;
@@ -303,7 +312,7 @@ table {
   list-style: none; }
 
 .login-form ul {
-  background-color: #686868; }
+  background-color: #062244; }
 
 .header-fixtures {
   margin: 0 auto;
@@ -325,13 +334,13 @@ table {
   border-radius: 0 !important; }
 
 .main-nav > li > a, .main-nav > li > a:visited, .main-nav > li > a:focus {
-  color: #d9fa61 !important; }
+  color: #fff !important; }
 
 .main-nav > li > a:hover {
   color: #ffffff !important; }
 
 .login-links a {
-  color: #d9fa61; }
+  color: #fff; }
 
 .logo {
   width: 100%;
@@ -513,6 +522,15 @@ table {
   background-position: center center;
   background-size: cover; }
 
+.small-post-background {
+  width: 100%;
+  height: 250px;
+  transition: all 0.5s ease-in-out; }
+
+.small-post-background:hover {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1); }
+
 .small-post-image {
   width: 100%;
   height: 250px;
@@ -522,7 +540,12 @@ table {
 .smallest-post-image {
   background-size: cover;
   width: 100%;
-  height: 170px; }
+  height: 170px;
+  transition: all 0.5s ease-in-out; }
+
+.smallest-post-image:hover {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1); }
 
 .other-news-image {
   width: 100%;
@@ -572,6 +595,12 @@ table {
   bottom: 2%;
   position: absolute;
   right: 2%; }
+
+.show-social-wrap .fa-print {
+  color: #062244 !important; }
+
+.show-social-wrap .fa-print:hover {
+  color: #062244 !important; }
 
 .fa-facebook-official {
   color: #777;
@@ -695,7 +724,7 @@ table {
 .footer {
   position: relative;
   bottom: 0;
-  background-color: #686868; }
+  background-color: #062244; }
 
 .footer-info {
   margin: auto;
@@ -721,10 +750,10 @@ hr {
   background-color: #5F6261 !important; }
 
 .main-drop {
-  background-color: #686868 !important; }
+  background-color: #062244 !important; }
 
 .main-drop > li {
-  border-bottom: 1px solid #d9fa61; }
+  border-bottom: 1px solid #fff; }
 
 .main-drop > li > a {
   color: #d9fa61 !important; }
@@ -955,7 +984,8 @@ hr {
 .latest-fixture-date {
   background-color: #fff;
   border-bottom: 3px solid #ddd;
-  padding: 1%; }
+  padding: 1%;
+  min-height: 30px !important; }
 
 .latest-fixture-date > .pull-right {
   text-align: right; }
@@ -1047,9 +1077,9 @@ hr {
   margin-left: 20px;
   max-height: 400px;
   overflow: auto;
-  border-left: 1px solid #686868;
-  border-right: 1px solid #686868;
-  border-bottom: 1px solid #686868; }
+  border-left: 1px solid #062244;
+  border-right: 1px solid #062244;
+  border-bottom: 1px solid #062244; }
 
 #search-results ul {
   list-style: none;
@@ -1102,13 +1132,15 @@ hr {
   color: #0990BD;
   text-decoration: underline; }
 
-.page-header-title:after {
-  content: '';
-  display: block;
-  width: 100%;
-  height: 3px;
-  background: #062244;
-  margin: 1% auto 0; }
+.page-header-title {
+  margin-top: 0 !important; }
+  .page-header-title:after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 3px;
+    background: #062244;
+    margin: 1% auto 0; }
 
 .edit-post-image {
   margin: 1% 0; }
@@ -1118,5 +1150,12 @@ hr {
 
 .user-edit-image img {
   width: 70px; }
+
+.stadium-info {
+  background-color: #eee;
+  border-bottom: 3px solid #ddd; }
+
+.stadium-info h5, .stadium-info p {
+  padding: 1%; }
 
 /*# sourceMappingURL=app.css.map */

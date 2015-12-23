@@ -18,7 +18,8 @@ class StadiumsController extends Controller
      */
     public function index()
     {
-        return view('admin.stadiums.index');
+        $stadiums = Stadium::all();
+        return view('admin.stadiums.index', compact('stadiums', $stadiums));
     }
 
     /**
@@ -49,6 +50,38 @@ class StadiumsController extends Controller
         return Redirect::to('/dashboard/stadiums/');
     }
 
+    public function fixtureStadium(Request $request)
+    {
+        $this->validate($request,['stadium_title'=>'required']);
+         //dd($request->all());
+   
+        $stadium = new Stadium(array(
+            'title'=>$request->get('stadium_title')
+            ));
+ 
+        $stadium->save();
+
+        $stadiums = Stadium::all();
+
+        return response()->json($stadiums);
+    }
+
+    public function teamStadiums(Request $request)
+    {
+        $this->validate($request,['stadium_title'=>'required']);
+         //dd($request->all());
+   
+        $stadium = new Stadium(array(
+            'title'=>$request->get('stadium_title')
+            ));
+ 
+        $stadium->save();
+
+        $stadiums = Stadium::all();
+
+        return response()->json($stadiums);
+    }
+
     /**
      * Display the specified resource.
      *
@@ -68,7 +101,10 @@ class StadiumsController extends Controller
      */
     public function edit($id)
     {
-        //
+        
+        $stadium = Stadium::where('id', '=', $id)->first();
+
+        return view('admin.stadiums.edit', compact('stadium', $stadium));
     }
 
     /**
@@ -80,7 +116,7 @@ class StadiumsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        dd($request->all());
     }
 
     /**
@@ -91,6 +127,10 @@ class StadiumsController extends Controller
      */
     public function destroy($id)
     {
-        //
+       $stadium = Stadium::find($id);
+       
+       $stadium->delete();
+       flash()->success('','Stadionas panaikintas!');
+       return Redirect::to('/dashboard/stadiums/');
     }
 }

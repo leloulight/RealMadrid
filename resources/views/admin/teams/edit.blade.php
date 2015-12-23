@@ -1,7 +1,9 @@
 @extends('admin')
 
 @section('admin_content')
-<h1 class="text-center">Komandos redagavimas {!! $team->title !!}</h1>
+
+@include('admin.teams.modals')
+<h1 class="text-center">Komandos pakeitimai - {!! $team->title !!}</h1>
 
 
 <div class="col-md-10 col-md-offset-1">
@@ -16,6 +18,7 @@
 
 		  <div class="form-group">
 	    <label for="stadium_id">Stadionas :</label>
+	    <em><a  class="create-modal" data-toggle="modal" data-target="#myteamStadiumModal">(Sukurti naują stadioną)</a></em>
 	      <select class="form-control" name="stadium_id">
 	      @foreach($stadiums as $stadium)
 	       @if($team->stadium->id == $stadium->id)

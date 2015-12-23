@@ -15,7 +15,6 @@
             <th>Rodoma nuo</th>
             <th>Redaguoti</th>
             <th>Nerodyti</th>
-            <th>Komentarai</th>
             <th>Ištrinti</th>
           </tr>
         </thead>
@@ -39,7 +38,6 @@
             <a href="/dashboard/posts/{!! $post->id !!}/edit">Redaguoti</a>
             </td>
             <td><input type="checkbox"/></td>
-            <td>(0)</td>
             <td><button class="btn btn-danger" data-toggle="modal" data-target="#myDeleteModal" post-id="{!! $post->id !!}">Ištrinti</button></td>
          </tr>
          @endforeach

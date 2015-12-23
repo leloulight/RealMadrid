@@ -5,6 +5,8 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use App\Category;
 use App\Poll;
+use App\Season;
+use App\Donate;
 use Carbon\Carbon;
 use DB;
 
@@ -23,6 +25,8 @@ class ViewComposerServiceProvider extends ServiceProvider
        $this->composeCalendar();
        $this->composeStatistics();
        $this->composePolls();
+       $this->composeSeasons();
+       $this->composeDonations();
        //$this->composeUser();
     }
 
@@ -75,38 +79,33 @@ class ViewComposerServiceProvider extends ServiceProvider
             ->where('fixtures.fixture_date', '>=', Carbon::now()->subHours(2))
             ->orderBy('fixtures.fixture_date', 'ASC')
             ->first();
-
             if($fixtures == NULL){
-            $fixtures = DB::table('fixtures')
-            ->leftJoin('stadiums', 'stadiums.id', '=', 'fixtures.stadium_id')
-            ->leftJoin('leagues', 'leagues.id', '=', 'fixtures.league_id')
-            ->leftJoin('teams AS team1', 'team1.id', '=', 'fixtures.team_1_id')
-            ->leftJoin('teams AS team2', 'team2.id', '=', 'fixtures.team_2_id')
-            ->select(
-                'stadiums.title AS stadium_title', 
-                'leagues.title AS league_title',  
-                'fixtures.fixture_date AS fixture_date', 
-                'team1.title AS team1_title',
-                'team2.title AS team2_title',
-                'team1.logo_path AS team1_logo_path',
-                'team1.logo_name AS team1_logo_name',
-                'team2.logo_path AS team2_logo_path',
-                'team2.logo_name AS team2_logo_name',
-                'fixtures.team_1_score AS team_1_score', 
-                'fixtures.team_2_score AS team_2_score'
-            )
-            ->where('fixtures.fixture_date', '<', Carbon::now()->addHours(2))
-            ->orderBy('fixtures.fixture_date', 'DESC')
-            ->first();  
+                        $fixtures = DB::table('fixtures')
+                        ->leftJoin('stadiums', 'stadiums.id', '=', 'fixtures.stadium_id')
+                        ->leftJoin('leagues', 'leagues.id', '=', 'fixtures.league_id')
+                        ->leftJoin('teams AS team1', 'team1.id', '=', 'fixtures.team_1_id')
+                        ->leftJoin('teams AS team2', 'team2.id', '=', 'fixtures.team_2_id')
+                        ->select(
+                            'stadiums.title AS stadium_title', 
+                            'leagues.title AS league_title',  
+                            'fixtures.fixture_date AS fixture_date', 
+                            'team1.title AS team1_title',
+                            'team2.title AS team2_title',
+                            'team1.logo_path AS team1_logo_path',
+                            'team1.logo_name AS team1_logo_name',
+                            'team2.logo_path AS team2_logo_path',
+                            'team2.logo_name AS team2_logo_name',
+                            'fixtures.team_1_score AS team_1_score', 
+                            'fixtures.team_2_score AS team_2_score'
+                        )
+                        ->where('fixtures.fixture_date', '<', Carbon::now())
+                        ->orderBy('fixtures.fixture_date', 'DESC')
+                        ->first();
             }
-
 
             $view->with('fixtures', $fixtures);
         });
-//return view('layout', 
- //           compact('fixtures', $fixtures));
-   
-       //view()->share('fixtures', $auth->user);
+
     }
 
     private function composeLatestFixtures()
@@ -200,6 +199,24 @@ class ViewComposerServiceProvider extends ServiceProvider
             $polls = Poll::latest()->skip(0)->take(1)->get();
 
             $view->with('polls', $polls);
+        });
+    }
+
+    private function composeSeasons()
+    {
+        view()->composer('partials.nav', function($view){
+            $seasons = DB::table('seasons')
+            ->orderBy('position', 'ASC')
+                ->get();
+
+            $view->with('seasons', $seasons);
+        });
+    }
+
+    private function composeDonations()
+    {
+         view()->composer('layout', function($view){
+            $view->with('donation', Donate::first());
         });
     }
 }

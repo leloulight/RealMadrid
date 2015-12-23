@@ -35,7 +35,7 @@
 						<div class="small-post-photo">
 							{{--*/ $photo = $posts[$i]->photos->first() /*--}}
 							@if($photo)
-							<div style="background-image:url('{!! $photo->path.$photo->name !!}');background-size:cover; width:100%;height:250px;"></div>
+							<div class="small-post-background" style="background-image:url('{!! $photo->path.$photo->name !!}');background-size:cover;"></div>
 								<!--<img src="{!! $photo->path.$photo->name !!}" alt="">-->
 							@endif
 							<div class="post-text">

@@ -16,7 +16,9 @@ class PositionsController extends Controller
      */
     public function index()
     {
-        //
+        $positions = Position::all();
+
+        return view('admin.positions.index', compact('positions', $positions));
     }
 
     /**
@@ -70,7 +72,9 @@ class PositionsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $position = Position::find($id);
+
+        return view('admin.positions.edit', compact('position', $position));
     }
 
     /**
@@ -82,7 +86,18 @@ class PositionsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $position = Position::find($id);
+
+        $position_title = $request->get('position_title');
+        $position_shortcode = $request->get('position_shortcode');
+
+        $position->title = $position_title;
+        $position->shortcode = $position_shortcode;
+
+        $position->save();
+
+        flash()->success('','Pakeista pozicija!');
+        return redirect()->back();
     }
 
     /**

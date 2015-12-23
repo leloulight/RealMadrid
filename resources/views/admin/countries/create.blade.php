@@ -36,7 +36,7 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script type="text/javascript">
   $(document).ready(function(){
-  $("#leagueFormUpload #file").change(function() {
+  $("#countriesFormUpload #file").change(function() {
     var fileName = $(this).val().replace(/C:\\fakepath\\/i, '');
     $("#file_upload").text(fileName);
   });

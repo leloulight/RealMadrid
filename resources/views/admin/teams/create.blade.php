@@ -2,6 +2,7 @@
 
 @section('admin_content')
 
+@include('admin.teams.modals')
 <div class="container col-md-8 col-md-offset-2">@include('errors.list')</div>
 
 <div class="container col-md-8 col-md-offset-2">
@@ -19,7 +20,8 @@
 
     <div class="form-group">
     <label for="stadium_id">Stadionas :</label>
-      <select class="form-control" name="stadium_id">
+    <em><a  class="create-modal" data-toggle="modal" data-target="#myteamStadiumModal">(Sukurti naują stadioną)</a></em>
+      <select class="form-control" name="stadium_id" id="teamCreate-stadiums">
       @foreach($stadiums as $stadium)
         <option value="{!! $stadium->id !!}">{!! $stadium->title !!}</option>
         @endforeach

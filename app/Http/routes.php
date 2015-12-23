@@ -29,31 +29,58 @@ Route::resource('/dashboard/posts', 'PostsController');
 Route::post('/posts/getpostcomments/{id}', 'PostsController@getPostsComments');
 
 Route::resource('/dashboard/stadiums', 'StadiumsController');
+Route::post('/dashboard/stadiums/fixtureStadiums', 'StadiumsController@fixtureStadium');
+Route::post('/dashboard/stadiums/teamStadiums', 'StadiumsController@teamStadiums');
+Route::get('/dashboard/santiago', 'SantiagoController@edit');
+Route::get('/santiago-bernabeu', 'SantiagoController@show');
+Route::post('/dashboard/santiago/{id}/redaguoti', 'SantiagoController@update');
 
 Route::resource('/dashboard/leagues', 'LeaguesController');
 Route::post('/dashboard/leagues/{id}/update', 'LeaguesController@update');
 Route::post('/dashboard/leagues/fixtureLeague', 'LeaguesController@fixtureLeague');
 
 Route::resource('/dashboard/seasons', 'SeasonsController');
+Route::post('/dashboard/seasons/{id}/redaguoti', 'SeasonsController@update');
+
 
 Route::resource('/dashboard/countries', 'CountriesController');
+Route::post('/dashboard/countries/{id}/redaguoti', 'CountriesController@update');
+Route::post('/dashboard/countries/playerCountry', 'CountriesController@playerCountry');
 
 Route::resource('/dashboard/positions', 'PositionsController');
-
-Route::resource('/dashboard/players', 'PlayersController');
+Route::post('/dashboard/positions/{id}/redaguoti', 'PositionsController@update');
 
 Route::resource('/dashboard/players/statistics', 'PlayerStatisticsController');
+Route::post('/dashboard/players/statistics/getPlayerStatisticsBySeason/{id}', 'PlayerStatisticsController@getPlayerStatisticsBySeason');
+
+
+Route::resource('/dashboard/players', 'PlayersController');
+Route::post('/dashboard/seasons/getPlayerBySeason/{id}', 'PlayersController@getPlayerBySeason');
+Route::post('/dashboard/seasons/getPlayerBySeason2/{id}', 'PlayersController@getPlayerBySeason2');
+Route::post('/dashboard/players/{id}/redaguoti', 'PlayersController@update');
 
 Route::resource('/dashboard/teams', 'TeamsController');
 Route::post('/dashboard/teams/{id}/update', 'TeamsController@update');
+Route::post('/dashboard/teams/fixtureTeam', 'TeamsController@fixtureTeam');
 
 Route::resource('/dashboard/fixtures', 'FixturesController');
+Route::get('/dashboard/latestFixtures', 'FixturesController@latest');
+Route::post('/dashboard/fixtures/{id}/redaguoti', 'FixturesController@update');
 
-Route::post('/dashboard/posts/category/create', 'CategoryController@store');
+Route::get('/dashboard/about', 'AboutController@edit');
+Route::post('/dashboard/about/{id}/redaguoti', 'AboutController@update');
+
+Route::resource('/dashboard/category', 'CategoryController');
+Route::post('/dashboard/posts/category/create', 'CategoryController@ajaxStore');
+Route::post('/dashboard/category/{id}/redaguoti', 'CategoryController@update');
 //Route::post('/dashboard/posts/category/getAllCategories', 'CategoryController@getAllCategories');
 Route::post('/dashboard/posts/tag/create', 'TagController@store');
 
 Route::post('/dashboard/posts/create/photos', 'PostsController@store');
+
+Route::get('/dashboard/donate/editDonateText', 'DonateController@edit');
+Route::resource('/dashboard/donate', 'DonateController');
+Route::post('/dashboard/donate/{id}/redaguoti', 'DonateController@update');
 
 Route::resource('/apklausa', 'PollController');
 Route::post('/apklausa/rezultatai', 'PollController@results');
@@ -63,6 +90,8 @@ Route::resource('/comments', 'CommentController');
 Route::post('/comments/{post_id}', 'CommentController@store');
 
 Route::get('/irasai/{category}/{slug}', 'PostsController@show');
+
+Route::get('/sudetis/{slug}', 'PlayersController@getPlayerBySeason');
 
 Route::get('/naujienos/visos', 'PostsController@getAllCategoriesPosts');
 

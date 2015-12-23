@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Category;
+use Redirect;
 use App\Http\Requests\CreatePostCategory;
 use App\Http\Controllers\Controller;
 
@@ -17,7 +18,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::all();
+
+        return view('admin.categories.index', compact('categories', $categories));
     }
 
     /**
@@ -27,7 +30,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.categories.create');
     }
 
     /**
@@ -37,6 +40,22 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
+    {
+        $this ->validate($request,['category'=>'required']);
+
+        $category = new Category(array(
+            'title'=>$request->get('category'),
+            'slug'=>str_slug($request->get('category'))
+            ));
+ 
+        $category->save();
+        //flash()->error('Success!','Your flyer has been created');
+        flash()->success('','Nauja kategorija sukurta');
+
+        return Redirect::to('/dashboard/category/');
+    }
+
+    public function ajaxStore(Request $request)
     {
         $this->validate($request,['new-post-category'=>'required']);
         
@@ -68,7 +87,9 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = Category::find($id);
+
+        return view('admin.categories.edit',compact('category', $category));
     }
 
     /**
@@ -80,7 +101,16 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $category = Category::find($id);
+
+        $category_title = $request->get('title');
+
+        $category->title = $category_title;
+
+        $category->save();
+
+        flash()->success('','Pakeista kategorija');
+        return Redirect::to('/dashboard/category/');
     }
 
     /**
@@ -91,7 +121,11 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+       $category = Category::find($id);
+
+       $category->delete();
+       flash()->success('','Kategorija panaikinta');
+       return redirect()->back();
     }
 
     private function getAllCategories(){

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Stadium;
 use App\League;
 use App\Team;
+use Carbon\Carbon;
 
 class Fixture extends Model
 {
@@ -26,4 +27,13 @@ class Fixture extends Model
     	return $this->hasMany('App\Team');
     }
     */
+
+    public function team()
+    {
+        return $this->hasMany('App\Team');
+    }
+    public function scopeLatestFixture($query)
+    {
+        $query->where('fixture_date','<=',Carbon::now());
+    }
 }

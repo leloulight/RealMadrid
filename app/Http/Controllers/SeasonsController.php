@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Season;
+use DB;
 use App\Http\Controllers\Controller;
 
 class SeasonsController extends Controller
@@ -16,7 +17,8 @@ class SeasonsController extends Controller
      */
     public function index()
     {
-        //
+        $seasons =  DB::table('seasons')->orderBy('position', 'asc')->get();
+        return view('admin.seasons.index', compact('seasons', $seasons));
     }
 
     /**
@@ -41,7 +43,8 @@ class SeasonsController extends Controller
 
         $season = new Season(array(
             'title'=>$request->get('season_title'),
-            'position' => $request->get('position')
+            'position' => $request->get('position'),
+            'slug' => str_slug($request->get('season_title'))
             ));
  
         $season->save();
@@ -70,7 +73,8 @@ class SeasonsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $season = Season::find($id);
+        return view('admin.seasons.edit', compact('season', $season));
     }
 
     /**
@@ -82,7 +86,18 @@ class SeasonsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $season = Season::find($id);
+
+        $season_title = $request->get('season_title');
+        $position = $request->get('position');
+
+        $season->title = $season_title;
+        $season->position = $position;
+
+        $season->save();
+
+        flash()->success('','Pakeistas sezonas!');
+        return redirect()->back();
     }
 
     /**
@@ -93,6 +108,10 @@ class SeasonsController extends Controller
      */
     public function destroy($id)
     {
-        //
+       /*$season = Season::find($id);
+
+       $season->delete();
+       flash()->success('','Sezonas panaikintas');
+       return redirect()->back();*/
     }
 }

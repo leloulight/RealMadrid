@@ -1,7 +1,7 @@
 @extends('admin')
 
 @section('admin_content')
-<h1 class="text-center">Lygos redagavimas {!! $league->title !!}</h1>
+<h1 class="text-center">Lygos pakeitimai - {!! $league->title !!}</h1>
 
 
 <div class="col-md-10 col-md-offset-1">

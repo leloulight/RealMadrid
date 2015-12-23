@@ -43,7 +43,11 @@
 			<div class="row">
 				<div class="gallery_image">
 				<figure>
-				  <img src="/{!! $post->photos[0]->path.$post->photos[0]->name !!}" >
+
+				<a href="/{!! $post->photos[0]->path.$post->photos[0]->name !!}" class="swipebox" title="{!! $post->title !!}">
+			      <img src="/{!! $post->photos[0]->path.$post->photos[0]->name !!}" >
+			      </a>
+				  
 				  <figcaption>
 				  {!! $post->photo_description !!}
 				  </figcaption>
@@ -76,7 +80,7 @@
 		<ul class="list-inline image-list">
 			@for($i; $i < $photos_count; $i++ )
 			  <li>
-			  <a href="/{!! $post->photos[$i]->path.$post->photos[$i]->name !!}" rel="gallery-1" class="swipebox" title="{!! $post->title !!}">
+			  <a href="/{!! $post->photos[$i]->path.$post->photos[$i]->name !!}"  class="swipebox" title="{!! $post->title !!}">
 			  <img  src="/{!! $post->photos[$i]->path.$post->photos[$i]->name !!}" alt="">
 			  </a>
 			  </li>

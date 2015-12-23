@@ -147,7 +147,7 @@
 	</div>
 
     <div class="form-group">
-    {!! Form::button('Sukurti įrašą',['class'=>'btn btn-warning form-control', 'id'=>'submit-all']) !!}
+    {!! Form::button('Sukurti įrašą',['class'=>'btn btn-primary form-control', 'id'=>'submit-all']) !!}
     </div>
 	
     {!! Form::close() !!}
@@ -168,5 +168,6 @@ $( "#submit-all").on("mouseover", function() {
   $("#textarea-value").text(value);
 });
 </script>
+
 
 @endsection

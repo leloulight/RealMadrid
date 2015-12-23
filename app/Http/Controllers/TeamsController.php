@@ -7,6 +7,7 @@ use App\Http\Requests;
 use App\Stadium;
 use Redirect;
 use App\Team;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use App\Http\Controllers\Controller;
 
 class TeamsController extends Controller
@@ -44,7 +45,7 @@ class TeamsController extends Controller
      */
     public function store(Request $request)
     {
-         $this ->validate($request,['team_title'=>'required', 'file'=>'required']);
+         $this ->validate($request,['team_title'=>'required','stadium_id'=>'required', 'file'=>'required|image|mimes:jpeg,jpg,png,bmp,gif,svg']);
 
           if ($request->file('file')) {
             $file = $request->file('file');
@@ -69,6 +70,36 @@ class TeamsController extends Controller
         flash()->success('','Nauja komanda sukurta');
 
         return Redirect::to('/dashboard/teams/');
+    }
+
+    public function fixtureTeam(Request $request)
+    {
+        $this->validate($request,['team_title'=>'required','stadium_id'=>'required', 'file'=>'required|image|mimes:jpeg,jpg,png,bmp,gif,svg']);
+         //dd($request->all());
+        if ($request->file('file')) {
+            //$this->validate($request,['file'=>'required|image|mimes:jpeg,jpg,png,bmp,gif,svg']);
+            $file = $request->file('file');
+
+            $path = $this->_team_logo_path;
+           
+            $name = uniqid().$file->getClientOriginalName();
+
+            $file->move($path, $name);
+
+        }
+
+        $team = new Team(array(
+            'title'=>$request->get('team_title'),
+            'stadium_id'=>$request->get('stadium_id'),
+            'logo_name' => $name,
+            'logo_path' => $path
+            ));
+ 
+        $team->save();
+
+        $teams = Team::all();
+
+        return response()->json($teams);
     }
 
     /**

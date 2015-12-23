@@ -22,4 +22,5 @@ class Team extends Model
     public function stadium(){
     	return $this->belongsTo('App\Stadium');
     }
+
 }
